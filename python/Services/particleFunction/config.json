@@ -1,0 +1,15 @@
+{
+    "name":"<ServiceName>",
+    "program":"./<program ececutable>",
+    "description":"<human readable description",
+    "configuration":{
+        "any":"key value pairs you need"    OPTIONAL
+    },
+    "parameters":"any parameters you need for the program", OPTIONAL
+    "input":{
+        "type":"time"       OPTIONAL
+    },
+    "output":{
+        "type":"boolean"    OPTIONAL
+    }
+}

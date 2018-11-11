@@ -1,0 +1,9 @@
+{
+    "name":"Time of Day",
+    "program":"./date.py",
+    "description":"return 24 hour time from system as HH:MM:SS",
+    "parameters":"+%H:%M:%S",
+    "output":{
+        "type":"time"
+    }
+}

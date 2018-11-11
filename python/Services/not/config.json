@@ -1,0 +1,11 @@
+{
+    "name":"Not",
+    "program":"./not.py",
+    "description":"Negates the input - 'True' to 'False', 'False' to 'True'. Exits if input is not 'True' or 'False'",
+    "input":{
+        "type":"boolean"
+    },
+    "output":{
+        "type":"boolean"
+    }
+}

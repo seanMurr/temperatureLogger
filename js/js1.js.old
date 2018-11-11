@@ -1,0 +1,186 @@
+
+
+var deviceID = "200035001647343337363432";
+var accessToken = "51d2491f8b4ec232aecfe0aa1ef33d1278dad9f0";
+var numSolenoids = 0;
+var overrideValues = 0;
+var timersJSON;
+
+function initialiseData(){
+  // initialise override data
+  initialiseOverrides();
+
+  initialiseTimers();
+}
+
+function getNumSolenoids(){
+  // getnumber of solenoids from devices
+  getParticleVar("numSolenoids");
+  // this will call getOverides() when data is received
+}
+
+function getOverides(){
+  getParticleVar("override");
+  // this will call getTimers() when data is received
+}
+
+function getTimers(){
+  getParticleVar("timersJSON");
+  // this will call initialisePage() when data is received
+}
+
+function initialisePage(){
+  //create checkboxes for each Solenoids
+  var overrideWrapper = document.getElementById("overrideWrapper");
+  var i;
+  for (i = 0; i < numSolenoids; i++) {
+    //create node
+    var chkbox = document.createElement("input");
+    chkbox.type = "checkbox";
+    chkbox.id="ch"+i;
+
+    var label = document.createTextNode("Chanel " + i);
+
+    var span = document.createElement("span");
+    span.appendChild(chkbox);
+    span.appendChild(label)
+
+    overrideWrapper.appendChild(span);
+    overrideWrapper.appendChild(document.createElement("br"));
+  }
+
+  // create button
+  var btn = document.createElement("button");
+  btn.onclick = sendOverride;
+  btn.innerHTML = "Set Overrides";
+
+  overrideWrapper.appendChild(btn);
+
+  //create table for timers
+  var timersWrapper = document.getElementById("timersWrapper");
+  var tble = document.createElement("table");
+  tble.id = "timerTable";
+  //create table headers
+  var headerRow = document.createElement("tr");
+
+  var headStart = document.createElement("th");
+  headStart.innerHTML = "Start Time";
+  headerRow.appendChild(headStart);
+
+  var headStop = document.createElement("th");
+  headStop.innerHTML = "Stop Time";
+  headerRow.appendChild(headStop);
+
+  var headNumSols = document.createElement("th");
+  headNumSols.innerHTML = "num Solenoids";
+  headerRow.appendChild(headNumSols);
+
+  var headSols = document.createElement("th");
+  headSols.innerHTML = "Solenoids";
+  headerRow.appendChild(headSols);
+
+  var headNoteLength = document.createElement("th");
+  headNoteLength.innerHTML = "Note Length";
+  headerRow.appendChild(headNoteLength);
+
+  var headNote = document.createElement("th");
+  headNote.innerHTML = "Note";
+  headerRow.appendChild(headNote);
+
+  tble.appendChild(headerRow);
+
+  timersWrapper.appendChild(tble);
+
+  //set values for overrides and timers
+  initialiseData();
+}
+
+function initialiseOverrides(){
+  var i;
+  var overrideData = overrideValues;
+  for(i=numSolenoids-1; i>=0;i--){
+    console.log(i+": "+ overrideData + " / " + Math.pow(2,i) + " = " + parseInt(overrideData/Math.pow(2,i)) + " r " + overrideData%Math.pow(2,i));
+
+
+    if(parseInt(overrideData/Math.pow(2,i)) >= 1){
+      // Serial.println(" ON");
+      document.getElementById("ch"+i).checked = true;
+      //digitalWrite(pins[i], HIGH);
+    }else{
+      // Serial.println(" OFF");
+      document.getElementById("ch"+i).checked = false;
+    }
+    overrideData = overrideData%Math.pow(2,i);
+  }
+}
+
+function initialiseTimers(){
+
+}
+
+function sendOverride(){
+  callParticleFunction("setOverride", encodeOverrideValue());
+}
+
+function callParticleFunction(funName, command) {
+  //alert("sendOverride");
+  console.log("Call function: " + funName);
+  var args = "access_token=" + accessToken;
+  args = args + command;
+  console.log(args);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     var responce = this.responseText;
+     // get override values from device appendChild
+     // update checkboxes
+    }
+  };
+  xhttp.open("POST", "https://api.particle.io/v1/devices/" + deviceID + "/" + funName, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(args);
+  return false;
+}
+
+function encodeOverrideValue(){
+  // alert("createCommand");
+  var command;
+  var data = 0;
+
+  for (i=0; i<8; i++){
+    if(document.getElementById('ch'+i).checked){
+      // alert("item " + i + " checked");
+      data += Math.pow(2,i);
+    }
+  }
+  command = "&arg="+data;
+
+  // alert(command);
+  console.log(command);
+  // document.getElementById("cmnd").innerHTML = command;
+  return command;
+}
+
+function getParticleVar(varName){
+  console.log("Get Variable: " + varName);
+  // document.getElementById("demo").innerHTML = "Waiting for update...";
+
+  requestURL = "https://api.particle.io/v1/devices/" + deviceID + "/" + varName + "/?access_token=" + accessToken;
+  $.getJSON(requestURL, function(json) {
+           console.log(json.result);
+           if (varName == "numSolenoids"){
+             numSolenoids = json.result;
+             getOverides();
+           }
+           else if(varName == "override"){
+             overrideValues = json.result;
+             getTimers();
+           }
+           else if(varName == "timersJSON"){
+             timersJSON = json.result;
+             initialisePage();
+           }
+           // document.getEnumSolenoidslementById("demo").innerHTML = json.result;
+           // setValues(JSON.parse(json.result));
+  });
+}
