@@ -1,0 +1,37 @@
+{
+    "accessToken":
+        [
+            "51d2491f8b4ec232aecfe0aa1ef33d1278dad9f0"
+        ],
+    "devices":
+        [
+            {
+              "name":"Kitchen",
+              "deviceID":"400020000b47343337373738",
+              "accessID":0
+            }
+        ],
+    "sensors":
+        [
+            {
+                "name": "Kitchen Fridge",
+                "device": 0,
+                "address":"28a24108060000c"
+            },
+            {
+                "name": "Kitchen Freezer",
+                "device": 0,
+                "address":"283f51080600004"
+            },
+            {
+                "name": "Baby Fridge",
+                "device": 0,
+                "address":"28ffc906901501f"
+            },
+            {
+                "name": "Baby Freezer",
+                "device": 0,
+                "address":"28ff954a901501b"
+            }
+        ]
+}
