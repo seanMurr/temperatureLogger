@@ -1,9 +1,0 @@
-{
-    "name":"Append To File",
-    "program":"./append.py",
-    "description":"appends input to 'times.txt' file",
-    "parameters":"times.txt",
-    "input":{
-        "type":"time"
-    }
-}

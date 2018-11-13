@@ -23,14 +23,6 @@
     return $deviceObj->{$variable};
   }
 
-  function sendCommandToQueue($device,$function, $solenoid, $time, $deviceName){
-    $fh = fopen("./python/queue.txt", "a") or die("Unable to open file! ./python/queue.txt");
-    // // {"solenoid":7,"time":25,"functName":"turnOn","deviceID":"200033000b47363433353735"}
-    $txt = "{\"solenoid\":\"$solenoid\",\"time\":\"$time\",\"functName\":\"$function\",\"deviceID\":\"$device\",\"deviceName\":\"$deviceName\"}";
-    fwrite($fh, $txt."\n");
-    fclose($fh);
-  }
-
   function getDeviceID($id){
     // $confObj = getConfigObj();
     // var_dump($confObj);

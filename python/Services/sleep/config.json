@@ -1,5 +1,0 @@
-{
-    "name":"sleep",
-    "program":"./sleep.py",
-    "description":"takes a long time to process"
-}

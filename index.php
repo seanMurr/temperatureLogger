@@ -26,8 +26,8 @@
 <!DOCTYPE>
 <html>
   <head>
-    <title>Garden Watering</title>
-    <link rel="stylesheet" href="./css/styles.css?version=1.5">
+    <title>Temperature Sensors</title>
+    <link rel="stylesheet" href="./css/styles.css?version=0.11">
     <script src="./js/js1.js"></script>
     <!--
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -35,25 +35,17 @@
   </head>
 
   <body>
-    <div id="deviceStatus">
-      Device Status
-			<?php fillDeviceStatusDiv();?>
-    </div>
-    <div id="overrideWrapper">
-      Overrides
-      <?php fillOverideDiv();?>
-    </div>
-    <div id="timersWrapper">
-      Timers
-			<?php fillTimersDiv();?>
+    <div id="Sensors">
+      Sensors
+			<?php fillDeviceSensorsTable();?>
     </div>
 		<div id="testingWrapper">
       Testing
-			<form action='./index.php'method='get'>
+			<!-- <form action='./index.php'method='get'>
 				<input type="number" name="solenoid">
 				<input type="number" name="time">
 				<input type="submit" value="submit">
-			</form>
+			</form> -->
     </div>
 
   </body>

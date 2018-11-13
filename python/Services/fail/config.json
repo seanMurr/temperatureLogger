@@ -1,5 +1,0 @@
-{
-    "name":"fail",
-    "program":"./fail.py",
-    "description":"exits flow"
-}

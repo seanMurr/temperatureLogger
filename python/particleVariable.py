@@ -9,7 +9,7 @@ def main():
     responce = particleCommunication.particleVariable(data)
     if responce != 'error':
         print(responce)
-        return responce
+        # return responce
     else:
         sys.exit(1)
     # print(particleCommunication.particleVariable(data))

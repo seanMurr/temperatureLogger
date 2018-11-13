@@ -1,2 +1,0 @@
-'{"data":"3,30","functName":"turnOn","deviceID":"200033000b47363433353735", "accessToken":"51d2491f8b4ec232aecfe0aa1ef33d1278dad9f0"}'
-'{"varName":"pinValues", "deviceID": "200033000b47363433353735", "accessToken": "51d2491f8b4ec232aecfe0aa1ef33d1278dad9f0"}'

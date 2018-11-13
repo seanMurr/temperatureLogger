@@ -1,8 +1,0 @@
-{
-    "name":"Quit If False",
-    "program":"./quitIfFalse.py",
-    "description":"exits flow if the input is 'False'",
-    "input":{
-        "type":"boolean"
-    }
-}
